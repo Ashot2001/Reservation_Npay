@@ -1,61 +1,60 @@
 steps:
-  #Reserfavtions
-  - name: 'gcr.io/cloud/builders/docker'
-    args: [
-      'build',
-      '-t',
-      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production',
-      '-f',
-      'apps/reservations/Dockerfile',
-      '.'
-    ]
-
-  - name: 'gcr.io/cloud/builders/docker'
+  # Reservations
+  - name: 'gcr.io/cloud-builders/docker'
     args: 
-    ['push','europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production']
+      - 'build'
+      - '-t'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production'
+      - '-f'
+      - 'apps/reservations/Dockerfile'
+      - '.'
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production'
 
-  #Auth
-  - name: 'gcr.io/cloud/builders/docker'
-    args: [
-      'build',
-      '-t',
-      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production',
-      '-f',
-      'apps/reservations/Dockerfile',
-      '.'
-    ]
+  # Auth
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production'
+      - '-f'
+      - 'apps/auth/Dockerfile'  # Corrected Dockerfile path
+      - '.'
 
-  - name: 'gcr.io/cloud/builders/docker'
-    args: 
-    ['push','europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production'
 
-  #Payments
-  - name: 'gcr.io/cloud/builders/docker'
-    args: [
-      'build',
-      '-t',
-      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/payments-1/production',
-      '-f',
-      'apps/reservations/Dockerfile',
-      '.'
-    ]
+  # Payments
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/payments-1/production'
+      - '-f'
+      - 'apps/payments/Dockerfile'  # Corrected Dockerfile path
+      - '.'
 
-  - name: 'gcr.io/cloud/builders/docker'
-    args: 
-    ['push','europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/payments-1/production']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/payments-1/production'
 
-  #Notifications
-  - name: 'gcr.io/cloud/builders/docker'
-    args: [
-      'build',
-      '-t',
-      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/notifications-1/production',
-      '-f',
-      'apps/reservations/Dockerfile',
-      '.'
-    ]
+  # Notifications
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/notifications-1/production'
+      - '-f'
+      - 'apps/notifications/Dockerfile'  # Corrected Dockerfile path
+      - '.'
 
-  - name: 'gcr.io/cloud/builders/docker'
-    args: 
-    ['push','europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/notifications-1/production']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/notifications-1/production'
