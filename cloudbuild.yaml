@@ -3,7 +3,7 @@ steps:
     args: [
       'build', 
       '-t',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/reservations/production',
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production',
       '-f',
       'apps/reservations/Dockerfile',
       '.'
@@ -11,13 +11,17 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/reservations/production'
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production',
+
     ]
+
+
+
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build', 
       '-t',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/auth/production',
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production',
       '-f',
       'apps/auth/Dockerfile',
       '.'
@@ -25,13 +29,15 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/auth/production'
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production'
     ]
+
+
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build', 
       '-t',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/notifications/production',
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/notifications-1/production',
       '-f',
       'apps/notifications/Dockerfile',
       '.'
@@ -39,13 +45,15 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/notifications/production'
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/notifications-1/production'
     ]
+
+
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build', 
       '-t',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/payments/production',
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/payments-1/production',
       '-f',
       'apps/payments/Dockerfile',
       '.'
@@ -53,7 +61,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'europe-west2-docker.pkg.dev/genuine-compass-429914-t4/payments/production'
+      'europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/payments-1/production'
     ]
 
 options:
