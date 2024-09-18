@@ -1,0 +1,91 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: reservations
+#   name: reservations
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: reservations
+#   template:
+#     metadata:
+#       labels:
+#         app: reservations
+#     spec:
+#       dnsPolicy: "None"  
+#       dnsConfig:
+#         nameservers:
+#           - "8.8.8.8"
+#         searches:
+#           - "svc.cluster.local"
+#           - "cluster.local"
+#         options:
+#           - name: "ndots"
+#             value: "5"
+#           - name: "timeout"
+#             value: "2"
+#           - name: "attempts"
+#             value: "2"
+#       containers:
+#         - name: reservations
+#           image: europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production
+#           env:
+#             - name: DB_CONNECT
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: mongodb
+#                   key: connectionString
+#             - name: PORT
+#               value: '3004'
+#             - name: AUTH_HOST
+#               value: auth-tcp
+#             - name: AUTH_PORT
+#               value: '3002'
+#             - name: PAYMENTS_HOST
+#               value: payments
+#             - name: PAYMENTS_PORT
+#               value: '3001'
+#           ports:
+#             - containerPort: 3004
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reservations
+  name: reservations
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservations
+  template:
+    metadata:
+      labels:
+        app: reservations
+    spec:
+      containers:
+        - image:  europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/reservations-1/production
+          name: reservations
+          env:
+            - name: DB_CONNECT
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: connectionString
+            - name: PORT
+              value: '3004'
+            - name: AUTH_HOST
+              value: auth-tcp
+            - name: AUTH_PORT
+              value: '3002'
+            - name: PAYMENTS_HOST
+              value: payments
+            - name: PAYMENTS_PORT
+              value: '3001'
+          ports:
+            - containerPort: 3004

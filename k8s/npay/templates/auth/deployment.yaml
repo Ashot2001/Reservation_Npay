@@ -1,0 +1,99 @@
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: auth
+#   name: auth
+# spec: 
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: auth
+#   template:
+#     metadata:
+#       labels:
+#         app: auth
+#     spec:
+#       dnsPolicy: "None"  
+#       dnsConfig:
+#         nameservers:
+#           - "8.8.8.8"  
+#         searches:
+#           - "svc.cluster.local"
+#           - "cluster.local"
+#         options:
+#           - name: "ndots"
+#             value: "5"
+#           - name: "timeout"
+#             value: "2"
+#           - name: "attempts"
+#             value: "2"
+#       containers:
+#       - name: auth
+#         image: europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production
+#         env:
+#           - name: DB_CONNECT
+#             valueFrom:             
+#               secretKeyRef:
+#                 name: mongodb
+#                 key: connectionString
+#           - name: JWT_SECRET
+#             valueFrom:
+#               secretKeyRef:
+#                 name: jwt
+#                 key: jwtSecret
+#           - name: JWT_EXPIRATION
+#             valueFrom:
+#               secretKeyRef:
+#                 name: jwt
+#                 key: expiration
+#           - name: TCP_PORT      
+#             value: '3002'
+#           - name: HTTP_PORT      
+#             value: '3003'        
+#       ports:
+#         - containerPort: 3002
+#         - containerPort: 3003
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth
+  name: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - image: europe-southwest1-docker.pkg.dev/genuine-compass-429914-t4/auth-1/production
+          name: auth
+          env:
+            - name: DB_CONNECT
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: connectionString
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt
+                  key: jwtSecret
+            - name: JWT_EXPIRATION
+              value: '3600'
+            - name: TCP_PORT
+              value: '3002'
+            - name: HTTP_PORT
+              value: '3003'
+          ports:
+            - containerPort: 3002
+            - containerPort: 3003
